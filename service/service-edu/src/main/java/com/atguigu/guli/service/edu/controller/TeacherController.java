@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -23,6 +24,7 @@ import java.util.List;
  * @author Qinhan
  * @since 2019-11-20
  */
+@CrossOrigin
 @Api(description = "讲师管理")
 @RestController
 @RequestMapping("/admin/edu/teacher")
@@ -88,6 +90,22 @@ public class TeacherController {
         @RequestBody Teacher teacher) {
         teacherService.updateById(teacher);
         return R.ok();
+    }
+
+    @ApiOperation(value="根据id列表删除讲师")
+    @DeleteMapping("batch-remove")
+    public R removeRows(@ApiParam(value = "讲师id列表", name = "idList", required = true)
+                        @RequestBody List<String> idList){
+        boolean result = teacherService.removeByIds(idList);
+        return R.ok().message("删除讲师成功");
+    }
+
+    @ApiOperation(value = "根据左关键字查询讲师名列表")
+    @GetMapping("list/name/{key}")
+    public R selectNameListByKey(@ApiParam(name = "key",value = "查询关键字",required = true)
+                                 @PathVariable String key){
+        List<Map<String, Object>>  nameList = teacherService.selectNameListByKey(key);
+        return R.ok().data("nameList", nameList);
     }
 
 
