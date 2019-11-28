@@ -10,7 +10,7 @@ aliyun:
   oss:
     file:
       endpoint: oss-cn-shanghai.aliyuncs.com
-      keyid: LTAI4FomhKjE68kaWGJYLZSt1
+      keyid: LTAI4FomhKjE68kaWGJYLZSt
       keysecret: Xluu5aNaMoVsfcOQN7KXaPFU4hvTxy
       #bucket可以在控制台创建，也可以使用java代码创建，注意先测试bucket是否已被占用
       bucketname: qh-guli
