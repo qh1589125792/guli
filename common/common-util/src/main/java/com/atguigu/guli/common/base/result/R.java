@@ -7,6 +7,9 @@ import lombok.Data;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @since 2019/11/20
+ */
 @Data
 @ApiModel(value = "全局统一返回结果")
 public class R {
@@ -22,6 +25,8 @@ public class R {
 
     @ApiModelProperty(value = "返回数据")
     private Map<String, Object> data = new HashMap<String, Object>();
+
+
 
     public R(){}
 
@@ -40,7 +45,6 @@ public class R {
         r.setMessage(ResultCodeEnum.UNKNOWN_REASON.getMessage());
         return r;
     }
-
 
     public static R setResult(ResultCodeEnum resultCodeEnum){
         R r = new R();
@@ -64,6 +68,7 @@ public class R {
         this.setCode(code);
         return this;
     }
+
 
     public R data(String key, Object value){
         this.data.put(key, value);

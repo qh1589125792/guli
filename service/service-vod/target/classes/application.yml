@@ -1,0 +1,30 @@
+server:
+  port: 8130 # 服务端口
+
+spring:
+  profiles:
+    active: dev # 环境设置
+  application:
+    name: guli-vod # 服务名
+
+  #inputstream上传的时候需要配置，javascript sdk不需要
+  servlet:
+    multipart:
+      max-file-size: 1024MB # 最大上传单个文件大小：默认1M
+      max-request-size: 1024MB # 最大置总上传的数据大小 ：默认10M
+
+aliyun:
+  vod:
+    file:
+      keyid: LTAI4FomhKjE68kaWGJYLZSt
+      keysecret: Xluu5aNaMoVsfcOQN7KXaPFU4hvTxy
+
+eureka:
+  client:
+    service-url:
+      defaultZone:
+        http://127.0.0.1:9110/eureka/
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10

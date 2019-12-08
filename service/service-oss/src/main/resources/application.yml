@@ -14,3 +14,13 @@ aliyun:
       keysecret: Xluu5aNaMoVsfcOQN7KXaPFU4hvTxy
       #bucket可以在控制台创建，也可以使用java代码创建，注意先测试bucket是否已被占用
       bucketname: qh-guli
+
+eureka:
+  client:
+    service-url:
+      defaultZone:
+        http://127.0.0.1:9110/eureka/
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10

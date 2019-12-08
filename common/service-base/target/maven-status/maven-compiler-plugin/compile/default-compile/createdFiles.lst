@@ -1,0 +1,7 @@
+com\atguigu\guli\service\base\handler\CommonMetaObjectHandler.class
+com\atguigu\guli\service\base\config\MybatisPlusConfig.class
+com\atguigu\guli\service\base\exception\GuliException.class
+com\atguigu\guli\service\base\config\RedisConfig.class
+com\atguigu\guli\service\base\model\BaseEntity.class
+com\atguigu\guli\service\base\config\Swagger2Config.class
+com\atguigu\guli\service\base\handler\GlobalExceptionHandler.class

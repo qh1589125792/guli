@@ -23,4 +23,7 @@ public interface TeacherService extends IService<Teacher> {
     List<Map<String,Object>> selectNameListByKey(String key);
 
 
+    Map<String, Object> webSelectPage(Page<Teacher> pageParam);
+
+    Map<String, Object> selectTeacherInfoById(String id);
 }
