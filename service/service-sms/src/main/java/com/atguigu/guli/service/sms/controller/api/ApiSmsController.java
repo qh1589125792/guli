@@ -29,13 +29,13 @@ public class ApiSmsController {
     @GetMapping("send/{phone}")
     public R getCode(@PathVariable String phone){
 
-        String code = redisTemplate.opsForValue().get(phone);
-        if(!StringUtils.isEmpty(code)){//短信尚未过期
-            return R.ok();
-        }
+//        String code = redisTemplate.opsForValue().get(phone);
+//        if(!StringUtils.isEmpty(code)){//短信尚未过期
+//            return R.ok();
+//        }
 
         //生成验证码并发送
-        code = RandomUtil.getFourBitRandom();
+        String code = RandomUtil.getFourBitRandom();
         HashMap<String, Object> param = new HashMap<>();
         param.put("code", code);
         smsService.send(phone, param);

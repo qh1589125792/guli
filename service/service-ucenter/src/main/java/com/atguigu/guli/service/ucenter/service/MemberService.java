@@ -37,4 +37,6 @@ public interface MemberService extends IService<Member> {
      * @return 用户登录信息
      */
     LoginInfoVo getLoginInfo(String memberId);
+
+    Member getByOpenid(String openid);
 }
