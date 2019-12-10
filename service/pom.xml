@@ -14,6 +14,7 @@
     <modules>
         <module>service-edu</module>
         <module>service-sms</module>
+        <module>service-order</module>
     </modules>
 
     <dependencies>

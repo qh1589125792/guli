@@ -1,20 +1,15 @@
 package com.atguigu.guli.service.edu.service.impl;
 
+import com.atguigu.guli.service.base.dto.CourseDto;
 import com.atguigu.guli.service.edu.client.OssClient;
 import com.atguigu.guli.service.edu.client.VodClient;
-import com.atguigu.guli.service.edu.entity.Chapter;
-import com.atguigu.guli.service.edu.entity.Course;
-import com.atguigu.guli.service.edu.entity.CourseDescription;
-import com.atguigu.guli.service.edu.entity.Video;
+import com.atguigu.guli.service.edu.entity.*;
 import com.atguigu.guli.service.edu.entity.form.CourseInfoForm;
 import com.atguigu.guli.service.edu.entity.vo.CoursePublishVo;
 import com.atguigu.guli.service.edu.entity.vo.CourseQueryVo;
 import com.atguigu.guli.service.edu.entity.vo.WebCourseQueryVo;
 import com.atguigu.guli.service.edu.entity.vo.WebCourseVo;
-import com.atguigu.guli.service.edu.mapper.ChapterMapper;
-import com.atguigu.guli.service.edu.mapper.CourseDescriptionMapper;
-import com.atguigu.guli.service.edu.mapper.CourseMapper;
-import com.atguigu.guli.service.edu.mapper.VideoMapper;
+import com.atguigu.guli.service.edu.mapper.*;
 import com.atguigu.guli.service.edu.service.CourseService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -56,6 +51,9 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     @Autowired
     private VodClient vodClient;
+
+    @Autowired
+    private TeacherMapper teacherMapper;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -251,5 +249,29 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         baseMapper.updateById(course);
         //获取课程信息
         return baseMapper.selectWebCourseVoById(id);
+    }
+
+    @Override
+    public CourseDto getCourseDtoById(String id) {
+        Course course = baseMapper.selectById(id);
+        CourseDto courseDto = new CourseDto();
+        BeanUtils.copyProperties(course, courseDto);
+
+        Teacher teacher = teacherMapper.selectById(course.getTeacherId());
+        courseDto.setTeacherName(teacher.getName());
+        return courseDto;
+    }
+
+    /**
+     * 根据课程id更改销售量
+     * @param id
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void updateBuyCountById(String id) {
+        Course course = this.getById(id);
+        long buyCount = course.getBuyCount() + 1;
+        course.setBuyCount(buyCount);
+        this.updateById(course);
     }
 }
